@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.38.0",
     "ai": "2.2.14",
     "langchain": "^0.0.129",
     "next": "13.4.12",
