@@ -10,3 +10,13 @@ export function unixTimestampToYMD(unixTimestamp: number): string {
   // Return in the format: YYYY-MM-DD
   return `${year}-${month}-${day}`;
 }
+
+export function chunkArray(array: any[], size: number): any[][] {
+  const chunked = [];
+  let index = 0;
+  while (index < array.length) {
+    chunked.push(array.slice(index, size + index));
+    index += size;
+  }
+  return chunked;
+}

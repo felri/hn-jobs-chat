@@ -15,30 +15,39 @@ export interface Database {
           id: number;
           kids: number[];
           parent: number;
-          text: string;
-          time: Date; // Assuming you'll convert the UNIX timestamp to a JavaScript Date object.
+          content: string;
+          timestamp: Date;
           type: string;
           embeddings: number[];
+          token_count: number;
+          metadata: Json;
+          html: string;
         };
         Insert: {
           by?: string;
           id?: number;
           kids?: number[];
           parent?: number;
-          text?: string;
-          time?: Date; // Assuming you'll convert the UNIX timestamp to a JavaScript Date object.
+          content?: string;
+          timestamp?: Date;
           type?: string;
           embeddings?: number[];
+          token_count?: number;
+          metadata?: Json;
+          html?: string;
         };
         Update: {
           by?: string;
           id?: number;
           kids?: number[];
           parent?: number;
-          text?: string;
-          time?: Date; // Assuming you'll convert the UNIX timestamp to a JavaScript Date object.
+          content?: string;
+          timestamp?: Date;
           type?: string;
           embeddings?: number[];
+          token_count?: number;
+          metadata?: Json;
+          html?: string;
         };
         Relationships: [];
       };
@@ -47,7 +56,36 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      match_comments_sections: {
+        Params: {
+          embedding: string;
+          match_threshold: number;
+          match_count: number;
+          min_content_length: number;
+        };
+        Return: {
+          id: number;
+          by?: string;
+          content: string;
+          timestamp?: Date;
+          type?: string;
+          embeddings?: number[];
+          token_count?: number;
+        }[];
+      };
+      match_documents: {
+        Params: {
+          query_embedding: string;
+          match_count: number;
+          filter: Json;
+        };
+        Return: {
+          id: number;
+          content: string;
+          similarity: number;
+          metadata?: Json;
+        }[];
+      };
     };
     Enums: {
       pricing_plan_interval: "day" | "week" | "month" | "year";
